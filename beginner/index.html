@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-quiv="X-UA-Compatible" content="IE=edge">
+  <title> 노마드코더 #2  </title>
+</head>
+<body>
+  <div id="root">
+
+  </div>
+
+  <script src="https://www.unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script>
+    // React로 element 생성하기 -> 개발자들이 사용하지 않는 방식임 (어려운 방식이라)
+    // React 본질을 이해하는 용도로 코드 이해하기
+
+    const root = document.getElementById('root');
+    // React로 요소 생성
+    const span = React.createElement('span', {id : 'I-am-span'}, ' Hello, I am a span ! ');
+    
+    // React로 생성한 요소를 body에 추가하기 -> React-dom : React로 생성한 element들을 html body에 추가할 수 있게 함
+    ReactDOM.render(span, root);
+  </script>
+</body>
+</html>
