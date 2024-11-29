@@ -19,11 +19,13 @@
     */
 
     const Container = () => {
+      console.log(' Container 시작 ');
       const [ count, setCount ] = React.useState(0);
       const onClick = () => {
-        setCount(count + 1);
-        console.log(count);
+        // setCount(count + 1);
+        setCounter( current => current + 1 );
       }
+      console.log(' Container 끝 ');
       return (
         <div>
           <h3> Total Count : {count} </h3>  
