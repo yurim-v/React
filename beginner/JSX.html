@@ -7,11 +7,13 @@
   <title>JSX</title>
 </head>
 <body>
-  
+  <div id="root"></div>
+
   <script src="https://www.unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
   <script src="  https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
+    const root = document.getElementById('root');
 
     /*
       JSX : 자바스크립트를 확장한 문법 -> React.createElement 대체 
@@ -57,7 +59,7 @@
       </div>
     )
 
-    ReactDOM.render(Container , document.body);
+    ReactDOM.render(Container , root);
 
   </script>
 </body>
