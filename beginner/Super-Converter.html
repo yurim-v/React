@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-compatible" content="IE=edge">
+  <title> Form State </title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://www.unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="  https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+    const root = document.getElementById('root');
+    // form 에서의 state 작용 / 사용자의 input을 얻는 방법
+    
+    function TimeConverter(){
+      const [ amount , setAmount ] = React.useState(0);  
+      const onChange = (event)=>{
+        setAmount(event.target.value);
+      } 
+      const Reset = () => setAmount(0);
+
+      const [ invert , setInvert ] = React.useState(false);
+      const onInvert = () => {
+        Reset();
+        setInvert(current => ! current);
+      }
+
+      return (
+        <div>
+          <h3> Time Converter </h3>
+
+          <div>
+            <label htmlFor = 'minutes'> Minutes </label>
+            <input id='minutes' type='number' placeholder='minutes' 
+            value={ invert ? amount * 60  : amount} 
+            disabled = {invert} onChange = {onChange} />
+          </div>
+
+          <h4> You want to convert {amount} </h4>
+
+          <div>
+            <label htmlFor = 'hours'> Hours </label>
+            <input id='hours' type='number'  placeholder='hours'  disabled = {!invert}
+            value={ !invert ? Math.round(amount / 60) : amount}
+            onChange = {onChange}  />
+          </div>
+
+          <button onClick ={ Reset } > Reset </button>
+          <button onClick ={ onInvert } > {invert ? 'Turn Back' : "Invert"} </button>
+        </div>
+      )
+    }
+    
+
+    function DistanceConverter(){
+      const [ distance, setDistance ] = React.useState(0);
+      const changeHandler = (event)=>{
+        setDistance( event.target.value )
+      }
+
+      const resetHandler = () =>{
+        setDistance(0);
+      }
+
+      const [ invert, setInvert ] = React.useState(false);
+      const invertHandler = () => {
+        resetHandler()
+        setInvert(!invert)
+      }
+
+      return(
+        <div>
+          <h3> Distance Converter </h3>
+          <div>
+            <label> KM  &nbsp;
+              <input id='killo' type='number' 
+              value={ invert ? Math.round( distance * 1.609344) : distance }
+              onChange={ changeHandler }
+              disabled={ invert }/>
+            </label>
+          </div>
+          <h3> You want to convert {distance} </h3>
+          <div>
+            <label> Mile  &nbsp;
+              <input id='mile' type='number' 
+              value={ !invert ? Math.round( distance * 0.621371) : distance }
+              disabled={ !invert }
+              onChange={ changeHandler }/>
+            </label>
+          </div>
+
+          <button onClick={resetHandler}> Reset </button>
+          &nbsp;
+          <button onClick={invertHandler}> Invert </button>
+        </div>
+      )
+    }
+
+
+    function App(){
+      const [ option, setOption ] = React.useState('xx');
+      const selectHandler = (event)=>{
+        setOption(event.target.value);
+      }
+      return (
+        <div>
+          <h1> Super Converter </h1>
+          <select onChange={selectHandler} value={option}>;
+            <option value='xx'> Select Converter !  </option>
+            <option value='0'> Time Converter </option>
+            <option value='1'> Distance Converter </option>
+          </select>
+          <hr />
+          { (option==='xx') ? "Please Select Converter ! " : null }
+          { (option==='0') ? <TimeConverter /> : null }
+          { (option==='1') ? <DistanceConverter /> : null }
+
+
+        </div>
+      )
+    }
+
+
+    ReactDOM.render( <App /> , root );
+  </script>
+</body>
+</html>
