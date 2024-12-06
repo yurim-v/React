@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-compatible" content="IE=edge">
+  <title> Form State </title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://www.unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="  https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types/prop-types.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+    // 자식 컴포넌트 
+    function Button( { btnName, fontSize = 20} ) {
+      return(
+        <button 
+          style={{
+            backgroundColor : '#85BDE7',
+            color : "white",
+            border : 'none',
+            width : '200px',
+            height : '80px',
+            borderRadius : '20px',
+            margin : '0 10px',
+            fontSize
+          }}> { btnName } </button>
+      )
+    }
+    
+    Button.propTypes  = {
+      btnName : PropTypes.string.isRequired,
+      fontSize : PropTypes.number
+    }
+    
+    // 부모 컴포넌트
+    function App(){
+      return (
+        <div>
+        < Button btnName={20} fontSize={"Save Changes"} />
+        </div>
+      )
+    }
+
+    const root = document.getElementById('root');
+    const reactRoot = ReactDOM.createRoot(root)
+    reactRoot.render( <App />);
+
+  </script>
+</body>
+</html>
