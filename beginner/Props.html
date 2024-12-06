@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-compatible" content="IE=edge">
+  <title> Form State </title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://www.unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="  https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+
+    const root = document.getElementById('root');
+
+    // 자식 컴포넌트 
+    function Button( {btnName, clickHandler } ) {
+      console.log( 'Rendered : ' + btnName );
+      return(
+        <button 
+          onClick = {clickHandler}
+          style={{
+            backgroundColor : '#85BDE7',
+            color : "white",
+            border : 'none',
+            width : '200px',
+            height : '80px',
+            borderRadius : '20px',
+            margin : '0 10px',
+          }}> { btnName } </button>
+      )
+    }
+
+    const MemorizedBtn = React.memo(Button);
+
+    // 부모 컴포넌트
+    function App(){
+      const [ value, SetValue ] = React.useState('Save Changes');
+    
+      function onClick(){
+        SetValue('Changed Name');
+      }
+      return (
+        <div>
+        < MemorizedBtn btnName={ value } clickHandler={onClick} />
+        < MemorizedBtn btnName='Continue'/>  
+        </div>
+      )
+    }
+
+
+    ReactDOM.render( <App /> , root );
+  </script>
+</body>
+</html>
