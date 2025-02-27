@@ -1,64 +1,67 @@
 import { useState, useEffect } from 'react';
 
-function Calculater({ coinName , coinPrice}){
-  const [ dollar , setDollar ] = useState(0)
-  const onChange = (e)=>{
-    setDollar(e.target.value);
-    setShowing(false);
+function Calculator({ coinName, coinSymbol, coinPrice}){
+  const [ show, setShow] = useState(false);
+  const [ money, setMoney ] = useState(0);
 
-  }
-
-  const [ showing, setShowing] = useState(false);
+  const onMoney = (e)=>{
+    setMoney(e.target.value);
+    setShow(false)
+  };
   const onClick = (e)=>{
-    setShowing(true);
+    setShow(true);
   }
   return(
     <div>
-      <input type='number'  placeholder='Wrtie Dollar' value={dollar} onChange={onChange}/>
-      <button onClick={onClick}> Calculate </button>
-      {showing ? <p> {coinName} : {dollar / coinPrice }</p> : null}
+      <h3>Coin Calculator</h3>
+      <input onChange={onMoney} value={money} type='number' />
+      <button onClick={onClick}>Calculate</button>
+      { show ? (
+        <div>
+          <p> My Money : {money} (USD)</p>
+          <p> {coinName} : {money / coinPrice} ({coinSymbol})</p>
+        </div>
+        ) : null}
+      
     </div>
   )
 }
 
-function App(){
-  const [ loading, setLoading ] =  useState(true);
-  const [ coins, setCoins ] = useState([]);
+export default function App(){
+  const [ loading , setLoading ] = useState(true);
+  const [ coins , setCoins ] = useState([]);
+  const [ value, setValue ] = useState('BTC');
 
-  const [ value, setValue ] = useState('BTC')
-  const onChange = (e)=>{
-    setValue(e.target.value);
-  }
+  const onSelect = (e)=>{
+    setValue(e.target.value); 
+  };
+
+  const selectCoin = coins.find((item)=>item.symbol === value);
+  console.log(selectCoin);
 
   useEffect(()=>{
     fetch('https://api.coinpaprika.com/v1/tickers')
      .then(response => response.json())
-     .then(data =>{
-        setCoins(data);
+     .then(data => {
         setLoading(false);
+        setCoins(data);
      })
-  },[]);
+  },[])
 
   return(
     <div>
-      <h1>The Coins ! { loading ? null : `(${coins.length})`}</h1>
-      {loading ? <strong>Loading...</strong> 
-       :   
-        <select value={value} onChange={onChange}  title="Choose an option">
-          {coins.map(coin =>(
-            <option key={coin.id} value={coin.symbol} > 
-              {coin.name} ({coin.symbol}) : {coin.quotes.USD.price} USD
-            </option>))}
+      <h1> The Coin Tracker ! {loading ? null : `(${coins.length})` }</h1>
+      { loading ? <h2>Loading...</h2> : 
+        <select onChange={onSelect} value={value}>
+          {coins.map(item=>(
+            <option key={item.id} value={item.symbol}> {item.name}({item.symbol}) : {item.quotes.USD.price} USD</option>
+          ))}
         </select> }
-    
-      {coins.map((coin)=>
-        (value===coin.symbol  ? 
-        <Calculater coinName={coin.name} coinPrice={coin.quotes.USD.price}/> : null ))
-      }
 
-  
+        { loading ? null : 
+          <Calculator 
+            coinName={selectCoin.name} coinSymbol={selectCoin.symbol} coinPrice={selectCoin.quotes.USD.price}/>}
     </div>
+
   )
 }
-
-export default App ; 
