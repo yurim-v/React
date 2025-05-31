@@ -14,7 +14,7 @@ function App(){
   
 
   return(
-    <Router basename='/for-beginner'>
+    <Router basename='/React/for-beginner'>
       <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/movie/:id' element={<Detail />} />
