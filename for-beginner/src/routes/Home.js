@@ -31,7 +31,8 @@ function Home(){
               key={movie.id} 
               coverImage={movie.medium_cover_image} 
               movieTitle={movie.title} 
-             movieGenres={movie.genres} 
+              movieGenres={movie.genres} 
+              movieId={movie.id}
             />
           ))}
         </div>
