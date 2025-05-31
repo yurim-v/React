@@ -14,7 +14,7 @@ function App(){
   
 
   return(
-    <Router basename='/React/for-beginner'>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/movie/:id' element={<Detail />} />
