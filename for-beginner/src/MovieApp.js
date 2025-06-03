@@ -11,7 +11,6 @@ import Detail from './routes/Detail.js'
 
 
 function App(){
-  
 
   return(
     <Router basename={process.env.PUBLIC_URL}>
