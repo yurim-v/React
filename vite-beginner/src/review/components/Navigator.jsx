@@ -14,13 +14,13 @@ function Navi(){
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">Calculator</a>
+                <a class="nav-link" href="/calculator">Calculator</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Coin Tracker</a>
+                <a class="nav-link" href="coinTracker">Coin Tracker</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Movie List</a>
+                <a class="nav-link" href="movieList">Movie List</a>
               </li>
 
             </ul>
