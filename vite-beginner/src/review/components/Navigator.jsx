@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 
 function Navi(){
-
+ 
   return(
     <>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
