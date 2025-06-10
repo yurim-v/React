@@ -1,5 +1,4 @@
 
-import '../css/home.css'
 import { useState } from 'react'
 
 function Calculater(){

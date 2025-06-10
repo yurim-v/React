@@ -6,6 +6,8 @@ import CoinTracker from './Router/coinTracker.jsx';
 import Calculator from './Router/calculator.jsx';
 import MovieList from './Router/MovieList.jsx';
 
+import './css/home.css'
+
 
 function App(){
 
