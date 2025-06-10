@@ -25,11 +25,11 @@ function Calculater(){
         <br/>
         <p> 입력값 : {time}</p>
         <br />
-        <button class="btn btn-primary"   onClick={()=>{
+        <button className="btn btn-primary"   onClick={()=>{
           setInvert(prev => !prev);
           setTime(0);
         }}>Invert</button>
-        <button class="btn btn-danger"   onClick={()=>{ setTime(0);}}>Reset</button>
+        <button className="btn btn-danger"   onClick={()=>{ setTime(0);}}>Reset</button>
       </div>
 
     </>
