@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Calculator from '../components/coinCalculator.jsx'
 
 function CoinTracker(){
   const [ loading, setLoading ] = useState(true);
   const [ coins, setCoins ] = useState([]);
   const [ option, setOption ] = useState('xx');
-  const [ coin, setCoin ] = useState({});
 
   async function getCoins(){
     let data = await (await fetch(' https://api.coinpaprika.com/v1/tickers?limit=10')).json();
@@ -14,18 +13,16 @@ function CoinTracker(){
   }
 
   const changeHanlder = (event)=>{
-    setCoin(coins.find(item =>(item.name === event.target.value)))
     setOption(event.target.value);
   }
+
+
+  let selectCoin =  useMemo(()=>coins.find(item =>(item.name === option)),[option])
+
 
   useEffect(()=>{
     getCoins();
   },[])
-
-    useEffect(()=>{
-      console.log(coin)
-    },[coin])
-  
   
   return(
     <>
@@ -39,7 +36,7 @@ function CoinTracker(){
             ))}
           </select>
         }
-         { option =='xx' ? null : < Calculator coinName={coin.name} coinSymbol={coin.symbol} coinPrice={coin.quotes.USD.price} />}
+         { option =='xx' ? null : < Calculator coinName={selectCoin.name} coinSymbol={selectCoin.symbol} coinPrice={selectCoin.quotes.USD.price} />}
       </div>
     </>
   )
